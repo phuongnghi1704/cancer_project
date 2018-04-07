@@ -35,8 +35,8 @@ QInt QInt::Bu1()
 	QInt obj;
 	for (int i = 0; i < 128; i++)
 	{
-		if (this->getBit(i) == 1) obj.setBit(0, i);
-		else obj.setBit(1, i);
+		if (this->getBit(i) == 1) obj.turnOff(i);
+		else obj.turnOn(i);
 	}
 	return obj;
 }
@@ -69,29 +69,29 @@ QInt QInt::operator+(QInt &a)
 		if (carry = 0)
 		{
 			if (this->getBit(i) == 0 and a.getBit(i) == 0)
-				obj.setBit(0, i);
+				obj.turnOff(i);
 			else if (this->getBit(i) == 1 and a.getBit(i) == 1)
 			{
 				carry = 1;
-			obj.setBit(0, i);
+				obj.turnOff(i);
 			}
-			else obj.setBit(1, i);
+			else obj.turnOn(i);
 		}
 		else
 		{
 			if (this->getBit(i) == 0 && a.getBit(i) == 0)
 			{
-				obj.setBit(1, i);
+				obj.turnOn(i);
 				carry = 0;
 			}
 
 			else if (this->getBit(i) == 1 && a.getBit(i) == 1) {
-				obj.setBit(1, i);
+				obj.turnOn(i);
 				carry = 1;
 			}
 			else
 			{
-				obj.setBit(0, i);
+				obj.turnOff(i);
 				carry = 1;
 			}
 		}
