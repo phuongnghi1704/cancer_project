@@ -42,7 +42,16 @@ public:
 		x |= (1 << i);
 	}
 
-	string QInt_to_Bin();
+	string QIntToBin();
+	bool BinToQInt(string bin);
+
+	string QIntToHex();
+	bool HexToQInt(string hex);
+
+	bool DecToQInt(string dec);
+	string QIntToDec();
+
+
 	QInt Bu1();
 	QInt Bu2();
 

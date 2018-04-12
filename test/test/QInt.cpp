@@ -1,4 +1,4 @@
-#include "QInt.h"
+﻿#include "QInt.h"
 
 //Reference: https://codescracker.com/cpp/program/cpp-program-convert-hexadecimal-to-binary.htm
 string HexStringToBinString(string hex)
@@ -73,7 +73,7 @@ QInt::~QInt()
 {
 }
 
-string QInt::QInt_to_Bin()
+string QInt::QIntToBin()
 {
 		string Bin = "";
 		for (int i = 0; i < 128; i++)
@@ -84,6 +84,40 @@ string QInt::QInt_to_Bin()
 				Bin.insert(0, "1");
 		}
 		return Bin;
+}
+
+bool QInt::BinToQInt(string bin)
+{
+	//Nếu ko đủ 128 bit thì add 0 vào đầu chuỗi
+	int n = bin.length();
+	if (n < 128)
+	{
+		for (int i = n; i < 128; i++)
+		{
+			bin.insert(0,"0");
+		}
+	}
+	for (int i = 0; i < 128; i++)
+	{
+		if (bin.at(abs(i-127))==0) turnOff(i);
+		else turnOn(i);
+	}
+	return true;
+}
+
+string QInt::QIntToHex()
+{
+	string bin = QIntToBin();
+	string hex = BinStringToBHexString(bin);
+	return hex;
+}
+
+bool QInt::HexToQInt(string hex)
+{
+	string bin = HexStringToBinString(hex);
+	this->BinToQInt(bin);
+	return true;
+
 }
 
 QInt QInt::Bu1()
