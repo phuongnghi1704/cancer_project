@@ -2,6 +2,7 @@
 #include <iostream>
 using namespace std;
 
+int ChartoInt(char c);
 
 class QInt
 {

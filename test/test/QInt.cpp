@@ -120,6 +120,25 @@ bool QInt::HexToQInt(string hex)
 
 }
 
+string QInt::QIntToDec()
+{
+	if (arrayBits[0] == 0 && arrayBits[1] == 0) return "0";
+	int sign = 1; //1 là dương, -1 là âm
+	string dec;
+	QInt A, temp = *this, ten;
+
+	if (getBit(127) == 1)
+	{
+		sign = -1;
+		temp = temp.Bu1();
+	}
+	for (int i = 0; i < 128; i++)
+	{
+
+	}
+
+}
+
 QInt QInt::Bu1()
 {
 	QInt obj;
@@ -187,4 +206,41 @@ QInt QInt::operator+(QInt &a)
 		}
 	}
 	return obj;
+}
+
+QInt QInt::operator&(QInt obj)
+{
+	QInt res, a = *this;
+	res.arrayBits[0] = a.arrayBits[0] & obj.arrayBits[0];
+	res.arrayBits[1] = a.arrayBits[1] & obj.arrayBits[1];
+	return res;
+}
+
+QInt QInt::operator|(QInt obj)
+{
+	QInt res, a = *this;
+	res.arrayBits[0] = a.arrayBits[0] | obj.arrayBits[0];
+	res.arrayBits[1] = a.arrayBits[1] | obj.arrayBits[1];
+	return res;
+}
+
+QInt QInt::operator^(QInt obj)
+{
+	QInt res, a = *this;
+	res.arrayBits[0] = a.arrayBits[0] ^ obj.arrayBits[0];
+	res.arrayBits[1] = a.arrayBits[1] ^ obj.arrayBits[1];
+	return res;
+}
+
+QInt QInt::operator~()
+{
+	QInt res, a = *this;
+	res.arrayBits[0] = ~a.arrayBits[0];
+	res.arrayBits[1] = ~a.arrayBits[1];
+	return res;
+}
+
+int ChartoInt(char c)
+{
+	return (int)c - 48;
 }
