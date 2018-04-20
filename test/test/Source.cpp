@@ -3,12 +3,12 @@
 
 void main()
 {
-	QInt a;
-	a.setBit(1, 1);
-	a.setBit(1, 4);
-	string str;
-	str=a.QInt_to_Bin();
-	getline(cin, str);
+	QInt A;
+	A.DecToQInt("10");
+	cout<<A.Print(16);
+
 	system("pause");
+	
+
 	
 }

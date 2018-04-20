@@ -1,14 +1,15 @@
 #pragma once
 #include <iostream>
+#include <string>
 using namespace std;
-
+string HexStringToBinString(string hex);
+string BinStringToBHexString(string bin);
+void StrDiv2(string &Dec);
 int ChartoInt(char c);
 
 class QInt
 {
-	long long arrayBits[2];
-	
-
+	 int arrayBits[4];
 	
 public:
 	QInt();
@@ -16,26 +17,20 @@ public:
 	~QInt();
 	bool getBit(int i)
 	{
-		int x = arrayBits[i / 64];
-		return (x >> (i % 64)) & 1;
+		int x = arrayBits[i / 32];
+		return (x >> (i % 32)) & 1;
 	}
 
-	void setBit(long long bit, int i)
-	{
-		if (bit == 1)
-			arrayBits[i / 64] |= (1 << 63-(i % 64));
-		arrayBits[i / 64] &= ~(1 << (63-i % 64));
-	}
-	
+
 	void turnOn(int i)
 	{
-		arrayBits[i / 64] |= (1 << 63 - (i % 64));
+		arrayBits[i / 32] |= (1 << (i % 32));
 
 	}
 
 	void turnOff(int i)
 	{
-		arrayBits[i / 64] &= ~(1 << (63 - i % 64));
+		arrayBits[i / 32] &= ~(1 << (i % 32));
 	}
 
 	void TurnBitOn(int &x, int i)
@@ -52,6 +47,10 @@ public:
 	bool DecToQInt(string dec);
 	string QIntToDec();
 
+	int findLastNumberOne();
+	string Print(int n);
+	bool Scan(string str, int n);
+
 
 	QInt Bu1();
 	QInt Bu2();
@@ -60,7 +59,8 @@ public:
 	QInt operator+(QInt&);
 	QInt operator-(QInt&);
 	QInt operator*(QInt&);
-	QInt operator/(QInt&);
+	QInt operator/(QInt);
+	QInt operator%(QInt);
 
 	QInt operator&(QInt b);
 	QInt operator|(QInt b);
@@ -70,7 +70,7 @@ public:
 	QInt operator<<(int j)
 	{
 		QInt result = *this;
-		for (int i = 0; i <= 1; i++)
+		for (int i = 0; i <= 3; i++)
 			result.arrayBits[i] = this->arrayBits[i] << j;
 
 		return result;
@@ -79,7 +79,7 @@ public:
 	QInt operator>>(int j)
 	{
 		QInt result = *this;
-		for (int i = 0; i <= 1; i++)
+		for (int i = 0; i <= 3; i++)
 			result.arrayBits[i] = this->arrayBits[i] >> j;
 
 		return result;
